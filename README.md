@@ -20,8 +20,10 @@
 **WEATHERNEXUS** is an autonomous, high-throughput national weather intelligence and crisis management platform designed for the Ministry of Earth Sciences and disaster authorities. It ingests, cross-corroborates, deduplicates, and analyzes millions of multi-source meteorological observations across all 36 States and Union Territories of India:
 * **Government Observatories:** IMD Automatic Weather Stations (AWS) & Doppler Weather Radars.
 * **Orbital Earth Observation:** INSAT-3DR Multispectral Infrared & Optical satellites, Open-Meteo, ECMWF reanalysis.
-* **Social Feeds:** Real-time `#IMD`, `#WeatherAlert`, `#Cyclone`, `#MumbaiRains` streams in **Hindi and English**.
+* **SerpApi Live Intelligence Engine:** Real-time Google News, Search & Web disaster scraping for `#IMD`, `#WeatherAlert`, `#Cyclone`, `#MumbaiRains` feeds across India.
+* **Social Feeds:** Real-time Twitter/X and crowdsourced meteorological posts in **Hindi and English**.
 * **Citizen Ground Sensing:** Geolocation-tagged Mobile PWA field observations with photo evidence verification.
+
 
 ---
 

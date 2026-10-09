@@ -10,5 +10,7 @@ class Settings:
     SIMHASH_THRESHOLD: int = 3
     SPAM_RATE_LIMIT_PER_HOUR: int = 5
     TWITTER_BEARER_TOKEN: str = os.getenv("TWITTER_BEARER_TOKEN", "")
+    SERPAPI_API_KEY: str = os.getenv("SERPAPI_API_KEY", "b846afb1931336e99f21d4348a725a2a55f953cb1bc0d0ac4d6f293f74c75e96")
 
 settings = Settings()
+

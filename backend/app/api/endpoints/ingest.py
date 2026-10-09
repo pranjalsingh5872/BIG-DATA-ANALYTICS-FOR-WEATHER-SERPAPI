@@ -124,3 +124,14 @@ def sync_twitter_feed():
     from backend.app.services.twitter_ingest import ingest_twitter_weather_feed
     result = ingest_twitter_weather_feed()
     return result
+
+@router.post("/sync-serpapi")
+def sync_serpapi_feed(api_key: str = None):
+    """
+    Ingests live weather-related web search, news, and disaster intelligence
+    via SerpApi Google Search & Google News engines.
+    """
+    from backend.app.services.serpapi_ingest import ingest_serpapi_weather_feed
+    result = ingest_serpapi_weather_feed(api_key=api_key)
+    return result
+
