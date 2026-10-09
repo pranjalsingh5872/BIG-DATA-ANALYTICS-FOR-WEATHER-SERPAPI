@@ -6,7 +6,9 @@
 [![Indian Standard Time](https://img.shields.io/badge/Time%20Standard-IST%20(UTC%2B5:30)-blue?style=for-the-badge)](https://weathernexus.vercel.app/)
 [![Bilingual](https://img.shields.io/badge/Language-English%20%7C%20%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-orange?style=for-the-badge)](https://weathernexus.vercel.app/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20Async-009688?style=for-the-badge&logo=fastapi)](https://weather-backend-onve.onrender.com/docs)
+[![SerpApi](https://img.shields.io/badge/Search%20Engine-SerpApi%20Live%20Intelligence-4285F4?style=for-the-badge&logo=google)](https://serpapi.com)
 [![React Vite](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react)](https://weathernexus.vercel.app/)
+
 
 ---
 
@@ -71,13 +73,19 @@ Every report receives an explainable **TrustScore™ (0–100%)** based on:
 3. **Physical Doppler Cross-Check**: Real-time cross-referencing with the nearest physical IMD Doppler station within 35 km.
 * Transparent **55% Citizen Ground Truth : 45% Satellite/Radar Corroboration** evidence split.
 
-### 5. Official Authority Review Desk
+### 5. SerpApi Live Search & Disaster Ingestion Engine
+* Integrates **SerpApi Google News & Search APIs** to perform continuous real-time scraping of emerging meteorological crises across India (`#IMD`, `#Cyclone`, `#MumbaiRains`, flood & cloudburst alerts).
+* Automatically extracts geo-locations, maps incidents onto **Uber H3 Resolution-7 hexagons**, runs perceptual image hash checks on thumbnails, and cross-references against live Doppler radar stations within 35 km.
+* Configured via `SERPAPI_API_KEY` with automated high-availability fallback.
+
+### 6. Official Authority Review Desk
 * Secure Operator triage desk reserved for verified IMD Duty Officers and Disaster Authorities (`auth@weathernexus.gov.in`).
 * Allows duty officers to inspect sensor cross-checks, review computer vision results, and render binding **VERIFY**, **QUARANTINE**, or **REJECT** decisions with required operational justifications.
 
-### 6. Common Alerting Protocol (CAP) 1-Click Emergency Broadcast
+### 7. Common Alerting Protocol (CAP) 1-Click Emergency Broadcast
 * Directly compliant with WMO and NDMA CAP v1.2 emergency alerting standards.
 * Authorizes officers to dispatch geo-targeted disaster alerts via **Cell Broadcast SMS**, **CAP RSS Feeds**, and **Emergency WhatsApp Broadcasts**.
+
 
 ---
 
@@ -102,7 +110,16 @@ BIG-DATA-ANALYTICS-FOR-WHEATHER/
 │   │   │   └── database.py         # SQLAlchemy engine & connection pool
 │   │   ├── models/
 │   │   │   └── event.py            # WeatherEvent, AuditLog, Grievance schemas
+│   │   ├── services/
+│   │   │   ├── ai_verifier.py      # Tri-Check AI Verification Engine (NLP + Vision + Doppler)
+│   │   │   ├── serpapi_ingest.py   # SerpApi Google News & Search live disaster ingestion
+│   │   │   ├── live_ingestion.py   # 38+ IMD radar stations & AWS real-time telemetry
+│   │   │   ├── deduplication.py    # SimHash 64-bit spatio-temporal deduplication (<15km)
+│   │   │   ├── h3_spatial.py       # Uber H3 Hexagonal spatial indexing (Resolution 7)
+│   │   │   ├── grievance_verifier.py # Citizen dispute anti-spam & proximity check (35km)
+│   │   │   └── pdf_generator.py    # Official Disaster Incident Brief PDF generator
 │   │   └── main.py                 # FastAPI application
+
 │   ├── requirements.txt
 │   └── seed_data.py
 └── frontend/
@@ -157,7 +174,12 @@ python -m venv venv
 source venv/bin/activate
 
 pip install -r requirements.txt
+
+# (Optional) Set your SerpApi Key for live Google News/Search disaster feeds:
+# export SERPAPI_API_KEY="your_serpapi_key_here"
+
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
 ```
 * Access the Swagger API documentation at: [http://localhost:8000/docs](http://localhost:8000/docs)
 
